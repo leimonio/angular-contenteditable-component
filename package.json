@@ -3,9 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
   "scripts": {
+    "build:example": "./node_modules/.bin/babel ./example/app.js --out-file ./example/app-compiled.js --presets=es2015 && ./node_modules/.bin/browserify ./example/app-compiled.js -o ./example/app-bundle.js && rm ./example/app-compiled.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "browserify": "^14.1.0"
+  }
 }

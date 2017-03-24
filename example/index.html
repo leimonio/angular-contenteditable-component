@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <script src="app-bundle.js"></script>
+  </head>
+  <body>
+    <div ng-app="app" ng-controller="AppController as vm">
+      <content-editable
+        class="message__body__editable"
+        active="vm.active"
+        on-change="vm.updateText(text)"
+        on-apply="vm.editApply(text)"
+        max-length="90">
+        <section>{{vm.text}}</section>
+      </content-editable>
+      <button ng-click="vm.toggleFocus()">Toggle Focus</button>
+    </div>
+  </body>
+</html>
