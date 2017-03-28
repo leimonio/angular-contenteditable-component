@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "build:example": "./node_modules/.bin/babel ./example/app.js --out-file ./example/app-compiled.js --presets=es2015 && ./node_modules/.bin/browserify ./example/app-compiled.js -o ./example/app-bundle.js && rm ./example/app-compiled.js",
+    "build:example": "./node_modules/.bin/babel ./example/src/app.js --out-file ./example/dist/app-compiled.js --presets=es2015 && ./node_modules/.bin/browserify ./example/dist/app-compiled.js -o ./example/dist/app-bundle.js && rm ./example/dist/app-compiled.js",
     "build": "./node_modules/.bin/babel ./src/angular-contenteditable-component.js --out-file ./dist/angular-contenteditable-component.js --presets=es2015",
     "build:prod": "./node_modules/.bin/uglifyjs ./dist/angular-contenteditable-component.js --output ./dist/angular-contenteditable-component.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
