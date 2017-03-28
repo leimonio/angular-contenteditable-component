@@ -1,20 +1,20 @@
 {
   "name": "angular-contenteditable-component",
   "version": "1.0.0",
-  "description": "",
+  "description": "An Angular 1.5 component for editable elements",
   "main": "index.js",
   "directories": {
     "example": "example",
     "test": "test"
   },
   "scripts": {
-    "build:example": "./node_modules/.bin/babel ./example/src/app.js --out-file ./example/dist/app-compiled.js --presets=es2015 && ./node_modules/.bin/browserify ./example/dist/app-compiled.js -o ./example/dist/app-bundle.js && rm ./example/dist/app-compiled.js",
-    "build": "./node_modules/.bin/babel ./src/angular-contenteditable-component.js --out-file ./dist/angular-contenteditable-component.js --presets=es2015",
-    "build:prod": "./node_modules/.bin/uglifyjs ./dist/angular-contenteditable-component.js --output ./dist/angular-contenteditable-component.min.js",
+    "build:example": "babel ./example/src/app.js --out-file ./example/dist/app-compiled.js --presets=es2015 && ./node_modules/.bin/browserify ./example/dist/app-compiled.js -o ./example/dist/app-bundle.js && rm ./example/dist/app-compiled.js",
+    "build": "babel ./src/angular-contenteditable-component.js --out-file ./dist/angular-contenteditable-component.js --presets=es2015",
+    "build:prod": "uglifyjs ./dist/angular-contenteditable-component.js --output ./dist/angular-contenteditable-component.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Konstantinos Leimonis <k.leimonis@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "angular": "^1.6.0"
   },
@@ -23,5 +23,11 @@
     "babel-preset-es2015": "6.24.0",
     "browserify": "14.1.0",
     "uglify-js": "^2.8.16"
-  }
+  },
+  "keywords": [
+    "angular",
+    "contenteditable",
+    "editable",
+    "component"
+  ]
 }
