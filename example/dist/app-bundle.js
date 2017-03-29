@@ -1,141 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function (root, factory) {
-    "use strict";
-
-    if (typeof define === 'function' && define.amd) {
-        define(['angular'], factory);
-    } else if (typeof module !== 'undefined' && _typeof(module.exports) === 'object') {
-        module.exports = factory(require('angular'));
-    } else {
-        return factory(root.angular);
-    }
-})(undefined, function (angular) {
-    "use strict";
-
-    var CONTENT_EDITABLE = 'ContentEditable';
-
-    var ContentEditable = {
-        controller: 'ContentEditableController',
-        bindings: {
-            active: '<?',
-            onApply: '&?',
-            onChange: '&?',
-            maxLength: '<?'
-        },
-        transclude: true,
-        template: '\n            <div ng-transclude\n                 contenteditable="{{$ctrl.isEditable}}"\n                 ng-keydown="$ctrl.handleKeycode($event)"\n                 ng-keyup="$ctrl.handleEdit($event)"\n                 ng-blur="$ctrl.editApply()"\n                 tabindex="-1"\n            ></div>\n        '
-    };
-
-    var KEYCODE = {
-        BACKSPACE: 8,
-        ENTER: 13,
-        ESCAPE: 27
-    };
-
-    var ContentEditableController = function () {
-        function ContentEditableController($element, $timeout) {
-            _classCallCheck(this, ContentEditableController);
-
-            this.$element = $element;
-            this.$timeout = $timeout;
-        }
-
-        _createClass(ContentEditableController, [{
-            key: '$onInit',
-            value: function $onInit() {
-                this.isEditable = typeof this.active !== "undefined" ? this.active : true;
-                this.$elem = angular.element(this.$element[0].querySelector('div[contenteditable]'));
-            }
-        }, {
-            key: '$onChanges',
-            value: function $onChanges(changesObj) {
-                if (changesObj.active && typeof changesObj.active.currentValue !== "undefined") {
-                    this.isEditable = changesObj.active.currentValue;
-                    if (this.isEditable) this._focus();
-                }
-            }
-        }, {
-            key: '_focus',
-            value: function _focus() {
-                var _this = this;
-
-                var text = this._getText();
-                this.initialText = text;
-                this.text = text;
-                this.$timeout(function () {
-                    return _this.$elem[0].focus();
-                });
-            }
-        }, {
-            key: '_blur',
-            value: function _blur() {
-                var _this2 = this;
-
-                this.$timeout(function () {
-                    return _this2.$elem[0].blur();
-                });
-            }
-        }, {
-            key: '_getText',
-            value: function _getText() {
-                return this.$elem[0].innerText.trim();
-            }
-        }, {
-            key: 'editApply',
-            value: function editApply() {
-                if (!this.isEditable) return;
-                if (typeof this.text === "undefined") return;
-                this.onApply({ text: this.text });
-            }
-        }, {
-            key: 'handleKeycode',
-            value: function handleKeycode(event) {
-                if (event.keyCode === KEYCODE.ENTER) {
-                    event.preventDefault();
-                    this.text = this._getText();
-                    this._blur();
-                } else if (event.keyCode === KEYCODE.ESCAPE) {
-                    this.text = this.initialText;
-                    this._blur();
-                } else if (event.keyCode === KEYCODE.BACKSPACE) {
-                    this.onChange({ text: this._getText() });
-                } else {
-                    if (this.maxLength && this._getText().length >= this.maxLength) {
-                        event.preventDefault();
-                    }
-                }
-            }
-        }, {
-            key: 'handleEdit',
-            value: function handleEdit(event) {
-                var keyCodeArr = Object.keys(KEYCODE).map(function (key) {
-                    return KEYCODE[key];
-                });
-                if (keyCodeArr.indexOf(event.keyCode) > -1) return;
-                this.text = this._getText();
-                this.onChange({ text: this.text });
-            }
-        }]);
-
-        return ContentEditableController;
-    }();
-
-    ContentEditableController.$inject = ['$element', '$timeout'];
-
-    angular.module(CONTENT_EDITABLE, []).component('contentEditable', ContentEditable).controller('ContentEditableController', ContentEditableController);
-
-    return CONTENT_EDITABLE;
-});
-
-},{"angular":4}],2:[function(require,module,exports){
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor}}();var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj};function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function")}}(function(root,factory){"use strict";if(typeof define==="function"&&define.amd){define(["angular"],factory)}else if(typeof module!=="undefined"&&_typeof(module.exports)==="object"){module.exports=factory(require("angular"))}else{return factory(root.angular)}})(undefined,function(angular){"use strict";var CONTENT_EDITABLE="ContentEditable";var ContentEditable={controller:"ContentEditableController",bindings:{active:"<?",onApply:"&?",onChange:"&?",maxLength:"<?"},transclude:true,template:'\n            <div ng-transclude\n                 contenteditable="{{$ctrl.isEditable}}"\n                 ng-keydown="$ctrl.handleKeycode($event)"\n                 ng-keyup="$ctrl.handleEdit($event)"\n                 ng-blur="$ctrl.editApply()"\n                 tabindex="-1"\n            ></div>\n        '};var KEYCODE={BACKSPACE:8,ENTER:13,ESCAPE:27};var ContentEditableController=function(){function ContentEditableController($element,$timeout){_classCallCheck(this,ContentEditableController);this.$element=$element;this.$timeout=$timeout}_createClass(ContentEditableController,[{key:"$onInit",value:function $onInit(){this.isEditable=typeof this.active!=="undefined"?this.active:true;this.$elem=angular.element(this.$element[0].querySelector("div[contenteditable]"))}},{key:"$onChanges",value:function $onChanges(changesObj){if(changesObj.active&&typeof changesObj.active.currentValue!=="undefined"){this.isEditable=changesObj.active.currentValue;if(this.isEditable)this._focus()}}},{key:"_focus",value:function _focus(){var _this=this;var text=this._getText();this.initialText=text;this.text=text;this.$timeout(function(){return _this.$elem[0].focus()})}},{key:"_blur",value:function _blur(){var _this2=this;this.$timeout(function(){return _this2.$elem[0].blur()})}},{key:"_getText",value:function _getText(){return this.$elem[0].innerText.trim()}},{key:"editApply",value:function editApply(){if(!this.isEditable)return;if(typeof this.text==="undefined")return;this.onApply({text:this.text})}},{key:"handleKeycode",value:function handleKeycode(event){if(event.keyCode===KEYCODE.ENTER){event.preventDefault();this.text=this._getText();this._blur()}else if(event.keyCode===KEYCODE.ESCAPE){this.text=this.initialText;this._blur()}else if(event.keyCode===KEYCODE.BACKSPACE){this.onChange({text:this._getText()})}else{if(this.maxLength&&this._getText().length>=this.maxLength){event.preventDefault()}}}},{key:"handleEdit",value:function handleEdit(event){var keyCodeArr=Object.keys(KEYCODE).map(function(key){return KEYCODE[key]});if(keyCodeArr.indexOf(event.keyCode)>-1)return;this.text=this._getText();this.onChange({text:this.text})}}]);return ContentEditableController}();ContentEditableController.$inject=["$element","$timeout"];angular.module(CONTENT_EDITABLE,[]).component("contentEditable",ContentEditable).controller("ContentEditableController",ContentEditableController);return CONTENT_EDITABLE});
+},{"angular":5}],2:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -144,9 +9,9 @@ var _angular = require('angular');
 
 var _angular2 = _interopRequireDefault(_angular);
 
-var _angularContenteditableComponent = require('../../dist/angular-contenteditable-component');
+var _index = require('../../index');
 
-var _angularContenteditableComponent2 = _interopRequireDefault(_angularContenteditableComponent);
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -185,10 +50,14 @@ var AppController = function () {
   return AppController;
 }();
 
-_angular2.default.module('app', [_angularContenteditableComponent2.default]);
+_angular2.default.module('app', [_index2.default]);
 _angular2.default.module('app').controller('AppController', AppController);
 
-},{"../../dist/angular-contenteditable-component":1,"angular":4}],3:[function(require,module,exports){
+},{"../../index":3,"angular":5}],3:[function(require,module,exports){
+var ContentEditable = require('./dist/angular-contenteditable-component.min.js');
+module.exports = ContentEditable;
+
+},{"./dist/angular-contenteditable-component.min.js":1}],4:[function(require,module,exports){
 /**
  * @license AngularJS v1.6.3
  * (c) 2010-2017 Google, Inc. http://angularjs.org
@@ -33534,8 +33403,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":3}]},{},[2]);
+},{"./angular":4}]},{},[2]);

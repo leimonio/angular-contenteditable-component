@@ -1,5 +1,5 @@
 import angular from 'angular';
-import ContentEditable from '../../dist/angular-contenteditable-component';
+import ContentEditable from '../../index';
 
 class AppController {
   constructor(){}
