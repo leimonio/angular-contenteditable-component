@@ -15,7 +15,7 @@
   },
   "author": "Konstantinos Leimonis <k.leimonis@gmail.com>",
   "license": "MIT",
-  "dependencies": {
+  "optionalDependencies": {
     "angular": "^1.6.0"
   },
   "devDependencies": {
