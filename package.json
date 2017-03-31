@@ -1,6 +1,6 @@
 {
   "name": "angular-contenteditable-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An Angular 1.5 component for editable elements",
   "main": "index.js",
   "directories": {
