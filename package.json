@@ -11,8 +11,9 @@
     "build:example": "babel ./example/src/app.js --out-file ./example/dist/app-compiled.js --presets=es2015 && ./node_modules/.bin/browserify ./example/dist/app-compiled.js -o ./example/dist/app-bundle.js && rm ./example/dist/app-compiled.js",
     "build": "babel ./src/angular-contenteditable-component.js --out-file ./dist/angular-contenteditable-component.js --presets=es2015",
     "build:prod": "npm run build && uglifyjs ./dist/angular-contenteditable-component.js --output ./dist/angular-contenteditable-component.min.js",
+    "karma": "./node_modules/.bin/karma",
     "prepublish": "npm run build:prod",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run karma start"
   },
   "author": "Konstantinos Leimonis <k.leimonis@gmail.com>",
   "license": "MIT",
