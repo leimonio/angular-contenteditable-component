@@ -37,7 +37,7 @@ angular.module('app', [ContentEditable]);
 **app.js**
 ```javascript
 import angular from 'angular';
-import ContentEditable from '../../index';
+import ContentEditable from 'angular-contenteditable-component';
 
 class AppController {
   constructor(){}
