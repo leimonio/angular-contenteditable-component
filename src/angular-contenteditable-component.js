@@ -66,6 +66,7 @@
             return this.$elem[0].innerText.trim();
         }
         editApply() {
+            if(!this.onApply || typeof this.onApply !== 'function') return;
             if(!this.isEditable) return;
             if(typeof this.text === "undefined") return;
             this.onApply({text: this.text});
@@ -79,6 +80,7 @@
                 this.text = this.initialText;
                 this._blur();
             } else if (event.keyCode === KEYCODE.BACKSPACE) {
+                if(!this.onChange || typeof this.onChange !== 'function') return;
                 this.onChange({text: this._getText()});
             } else {
                 if(this.maxLength && this._getText().length >= this.maxLength) {
@@ -87,6 +89,7 @@
             }
         }
         handleEdit(event) {
+            if(!this.onChange || typeof this.onChange !== 'function') return;
             const keyCodeArr = Object.keys(KEYCODE).map(key => KEYCODE[key]);
             if (keyCodeArr.indexOf(event.keyCode) > -1) return;
             this.text = this._getText();
