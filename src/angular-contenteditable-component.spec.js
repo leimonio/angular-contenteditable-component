@@ -100,6 +100,40 @@ describe('Component:ContentEditable', function() {
         let expected = 'Random Text Here!!';
         expect(actual).toEqual(expected);
       });
+
+      it('should change active and isEditable', () => {
+        $ctrl._focus = jasmine.createSpy('_focus');
+
+        scope.active = true;
+        scope.$apply();
+        expect($ctrl.active).toBe(true);
+        expect($ctrl.isEditable).toBe(true);
+        expect($ctrl._focus).toHaveBeenCalled();
+
+        $ctrl._focus = jasmine.createSpy('_focus');
+        scope.active = false;
+        scope.$apply();
+        expect($ctrl.active).toBe(false);
+        expect($ctrl.isEditable).toBe(false);
+        expect($ctrl._focus).not.toHaveBeenCalled();
+      });
+
+      it('should trigger _focus on active change to true', inject($timeout => {
+        spyOn($ctrl,'_getText').and.callThrough();
+
+        scope.active = true;
+        scope.$apply();
+
+        expect($ctrl._getText).toHaveBeenCalled();
+
+        let expected = 'Random Text Here!!';
+        expect($ctrl.text).toEqual(expected);
+        expect($ctrl.initialText).toEqual(expected);
+
+        spyOn($ctrl.$elem[0],'focus');
+        $timeout.flush();
+        expect($ctrl.$elem[0].focus).toHaveBeenCalled();
+      }));
     });
   });
 });
