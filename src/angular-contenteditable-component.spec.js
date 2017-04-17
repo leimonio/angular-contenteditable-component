@@ -36,6 +36,12 @@ describe('Component:ContentEditable', function() {
         expect($ctrl.isEditable).toBe(true);
         expect($ctrl.$elem).toBeDefined();
       })
+
+      it('should render correct text', () => {
+        let actual = element[0].innerText.trim();
+        let expected = 'Some random text here';
+        expect(actual).toEqual(expected);
+      });
     });
   });
 
@@ -87,6 +93,12 @@ describe('Component:ContentEditable', function() {
         expect($ctrl.isEditable).toBeDefined();
         expect($ctrl.isEditable).toBe(false);
         expect($ctrl.$elem).toBeDefined();
+      });
+
+      it('should render correct text', () => {
+        let actual = element[0].innerText.trim();
+        let expected = 'Random Text Here!!';
+        expect(actual).toEqual(expected);
       });
     });
   });
