@@ -1,4 +1,6 @@
-# **Angular Content Editable Component** [![npm version](https://badge.fury.io/js/angular-contenteditable-component.svg)](https://badge.fury.io/js/angular-contenteditable-component)
+# **Angular Content Editable Component**
+[![npm version](https://badge.fury.io/js/angular-contenteditable-component.svg)](https://badge.fury.io/js/angular-contenteditable-component)
+[![Build Status](https://travis-ci.org/kwnccc/angular-contenteditable-component.svg?branch=master)](https://travis-ci.org/kwnccc/angular-contenteditable-component)
 
 Simple Angular 1.5 component making wrapped text elements editable.
 
